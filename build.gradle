@@ -55,9 +55,8 @@ test {
 	useJUnitPlatform()
 }
 
-// querydsl 적용
 
-apply plugin: "com.ewerk.gradle.plugins.querydsl" // Plugin 적용
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
 def querydslSrcDir = 'src/main/generated'
 
 querydsl {
@@ -73,7 +72,7 @@ sourceSets {
 		}
 	}
 }
-// JPA Annotaion Processor Error를 잡아준다.
+
 compileQuerydsl{
 	options.annotationProcessorPath = configurations.querydsl
 }

@@ -18,7 +18,6 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
     private String tag;
     private String gridX;
     private String gridY;

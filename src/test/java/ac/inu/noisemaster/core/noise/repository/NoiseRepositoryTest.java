@@ -52,6 +52,7 @@ class NoiseRepositoryTest {
 
     private void saveMockNoise(int count) {
         Place place = Place.builder()
+                .tag("태그")
                 .gridX("123")
                 .gridY("321")
                 .build();

@@ -7,15 +7,15 @@ import org.springframework.data.domain.Page;
 
 @Getter
 public class NoisePagingResDTO {
-    private NoiseBundleResDTO noises;
+    private NoiseBundleResDTO data;
     private int totalPageNumber;
     private int currentPageNumber;
     private boolean isFirst;
     private boolean isLast;
 
     @Builder
-    public NoisePagingResDTO(NoiseBundleResDTO noises, int totalPageNumber, int currentPageNumber, boolean isFirst, boolean isLast) {
-        this.noises = noises;
+    public NoisePagingResDTO(NoiseBundleResDTO data, int totalPageNumber, int currentPageNumber, boolean isFirst, boolean isLast) {
+        this.data = data;
         this.totalPageNumber = totalPageNumber;
         this.currentPageNumber = currentPageNumber;
         this.isFirst = isFirst;
@@ -24,7 +24,7 @@ public class NoisePagingResDTO {
 
     public static NoisePagingResDTO of(Page<Noise> pagedNoise) {
         return NoisePagingResDTO.builder()
-                .noises(NoiseBundleResDTO.of(pagedNoise.getContent()))
+                .data(NoiseBundleResDTO.of(pagedNoise.getContent()))
                 .totalPageNumber(pagedNoise.getTotalPages())
                 .currentPageNumber(pagedNoise.getNumber())
                 .isFirst(pagedNoise.isFirst())

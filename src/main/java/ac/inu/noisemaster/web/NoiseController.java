@@ -22,6 +22,8 @@ public class NoiseController {
 
     private final NoiseService noiseService;
 
+    //날짜 검색조건 추가
+    //데시벨은 입력한 데시벨의 10단위로 10~19 까지 나오게
     @GetMapping
     public ResponseEntity<NoisePagingResDTO> findNoiseAdvance(@RequestParam(required = false) String device,
                                                               @RequestParam(required = false) String decibel,
@@ -36,4 +38,13 @@ public class NoiseController {
     public ResponseEntity<NoiseResDTO> saveNoise(@RequestBody NoiseSaveDTO noiseSaveDTO) {
         return new ResponseEntity<>(noiseService.save(noiseSaveDTO), HttpStatus.CREATED);
     }
+
+    //GET 디바이스별 가장 최근 정보 출력 ( 태그, 디바이스 아이디, 가장 최근 입력시간, 가장 최근 데시벨, 온도)
+    @GetMapping("/top")
+    public ResponseEntity<Object> find(){
+        return null;
+    }
+
+    //tag 수정
+
 }
