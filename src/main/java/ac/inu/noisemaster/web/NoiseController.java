@@ -29,9 +29,10 @@ public class NoiseController {
                                                               @RequestParam(required = false) String decibel,
                                                               @RequestParam(required = false) String temperature,
                                                               @RequestParam(required = false) String tag,
+                                                              @RequestParam(required = false) String date,
                                                               @RequestParam(defaultValue = "0") int page,
                                                               @RequestParam(defaultValue = "10") int size) {
-        return new ResponseEntity<>(noiseService.findNoiseAdvance(device, decibel, temperature, tag, PageRequest.of(page, size)), HttpStatus.OK);
+        return new ResponseEntity<>(noiseService.findNoiseAdvance(device, decibel, temperature, tag, date, PageRequest.of(page, size)), HttpStatus.OK);
     }
 
     @PostMapping
