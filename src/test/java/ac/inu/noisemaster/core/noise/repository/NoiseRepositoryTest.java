@@ -40,7 +40,7 @@ class NoiseRepositoryTest {
         saveMockNoise(20);
 
         Pageable pageable = PageRequest.of(0, 5);
-        Page<Noise> pagedNoise = noiseRepository.findDynamicPagingQueryAdvance(null, null, null, null, pageable);
+        Page<Noise> pagedNoise = noiseRepository.findDynamicPagingQueryAdvance(null, null, null, null, null, pageable);
 
         log.info(gson.toJson(pagedNoise.getContent()));
         log.info(gson.toJson(pagedNoise.getTotalPages()));

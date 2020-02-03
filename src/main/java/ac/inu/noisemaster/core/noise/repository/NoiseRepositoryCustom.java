@@ -5,5 +5,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface NoiseRepositoryCustom {
-    Page<Noise> findDynamicPagingQueryAdvance(String device, String decibel, String temperature, String tag, Pageable pageable);
+    Page<Noise> findDynamicPagingQueryAdvance(String device, String decibel, String temperature, String tag, String date, Pageable pageable);
 }

@@ -35,7 +35,7 @@ public class NoiseService {
 
     @Transactional(readOnly = true)
     public NoisePagingResDTO findNoiseAdvance(String device, String decibel, String temperature, String tag, String date, Pageable pageable) {
-        Page<Noise> pagedNoise = noiseRepository.findDynamicPagingQueryAdvance(device, decibel, temperature, tag, pageable);
+        Page<Noise> pagedNoise = noiseRepository.findDynamicPagingQueryAdvance(device, decibel, temperature, tag, date, pageable);
         return NoisePagingResDTO.of(pagedNoise);
     }
 }

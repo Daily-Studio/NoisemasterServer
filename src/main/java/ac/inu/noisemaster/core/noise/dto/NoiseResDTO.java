@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,7 +16,7 @@ public class NoiseResDTO {
     private String device;
     private String temperature;
     private PlaceDTO placeDTO;
-    private LocalDateTime createdTime;
+    private String createdTime;
 
     @Builder
     public NoiseResDTO(String decibel, String device, String temperature, PlaceDTO placeDTO, LocalDateTime createdTime) {
@@ -23,7 +24,7 @@ public class NoiseResDTO {
         this.device = device;
         this.temperature = temperature;
         this.placeDTO = placeDTO;
-        this.createdTime = createdTime;
+        this.createdTime = createdTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     public static NoiseResDTO from(Noise noise) {
