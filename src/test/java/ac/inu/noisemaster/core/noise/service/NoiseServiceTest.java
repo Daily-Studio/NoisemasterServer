@@ -2,9 +2,10 @@ package ac.inu.noisemaster.core.noise.service;
 
 import ac.inu.noisemaster.core.noise.domain.Noise;
 import ac.inu.noisemaster.core.noise.domain.Place;
-import ac.inu.noisemaster.core.noise.dto.NoiseSaveDTO;
-import ac.inu.noisemaster.core.noise.repository.NoiseRepository;
+import ac.inu.noisemaster.core.noise.dto.noise.NoiseSaveDTO;
 import ac.inu.noisemaster.core.noise.repository.PlaceRepository;
+import ac.inu.noisemaster.core.noise.repository.device.DeviceRepository;
+import ac.inu.noisemaster.core.noise.repository.noise.NoiseRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,11 +29,14 @@ class NoiseServiceTest {
     private NoiseRepository noiseRepository;
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     @AfterEach
     void tearDown() {
         noiseRepository.deleteAll();
         placeRepository.deleteAll();
+        deviceRepository.deleteAll();
     }
 
     @DisplayName("1개 정상저장")

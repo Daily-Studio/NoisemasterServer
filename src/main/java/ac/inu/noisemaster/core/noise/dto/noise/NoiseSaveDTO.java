@@ -1,5 +1,6 @@
-package ac.inu.noisemaster.core.noise.dto;
+package ac.inu.noisemaster.core.noise.dto.noise;
 
+import ac.inu.noisemaster.core.noise.domain.Device;
 import ac.inu.noisemaster.core.noise.domain.Noise;
 import ac.inu.noisemaster.core.noise.domain.Place;
 import lombok.Builder;
@@ -28,10 +29,10 @@ public class NoiseSaveDTO {
         this.gridY = gridY;
     }
 
-    public Noise toNoiseEntity(Place place) {
+    public Noise toNoiseEntity(Device device, Place place) {
         return Noise.builder()
                 .decibel(this.decibel)
-                .device(this.device)
+                .device(device)
                 .temperature(this.temperature)
                 .place(place)
                 .build();
@@ -43,5 +44,9 @@ public class NoiseSaveDTO {
                 .gridX(gridX)
                 .gridY(gridY)
                 .build();
+    }
+
+    public Device toDeviceEntity() {
+        return new Device(this.device);
     }
 }

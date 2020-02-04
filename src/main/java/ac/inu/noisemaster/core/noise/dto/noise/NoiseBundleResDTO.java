@@ -1,4 +1,4 @@
-package ac.inu.noisemaster.core.noise.dto;
+package ac.inu.noisemaster.core.noise.dto.noise;
 
 import ac.inu.noisemaster.core.noise.domain.Noise;
 import lombok.Getter;
@@ -20,4 +20,5 @@ public class NoiseBundleResDTO {
                 .collect(Collectors.toList());
         return new NoiseBundleResDTO(noiseResDTOs);
     }
+
 }

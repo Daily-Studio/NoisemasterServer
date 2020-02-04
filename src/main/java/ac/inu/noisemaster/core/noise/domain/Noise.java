@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,18 +19,23 @@ public class Noise extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Device device;
     private Double decibel;
-    private String device;
     private String temperature;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Place place;
 
     @Builder
-    public Noise(Double decibel, String device, String temperature, String tag, Place place) {
+    public Noise(Double decibel, Device device, String temperature, String tag, Place place) {
         this.decibel = decibel;
         this.device = device;
         this.temperature = temperature;
         this.place = place;
+    }
+
+    public String getDeviceName() {
+        return device.getName();
     }
 
 }

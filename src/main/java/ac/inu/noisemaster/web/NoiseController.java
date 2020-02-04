@@ -1,8 +1,9 @@
 package ac.inu.noisemaster.web;
 
-import ac.inu.noisemaster.core.noise.dto.NoisePagingResDTO;
-import ac.inu.noisemaster.core.noise.dto.NoiseResDTO;
-import ac.inu.noisemaster.core.noise.dto.NoiseSaveDTO;
+import ac.inu.noisemaster.core.noise.dto.device.DeviceRecentBundleResDTO;
+import ac.inu.noisemaster.core.noise.dto.noise.NoisePagingResDTO;
+import ac.inu.noisemaster.core.noise.dto.noise.NoiseResDTO;
+import ac.inu.noisemaster.core.noise.dto.noise.NoiseSaveDTO;
 import ac.inu.noisemaster.core.noise.service.NoiseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -40,9 +41,9 @@ public class NoiseController {
     }
 
     //GET 디바이스별 가장 최근 정보 출력 ( 태그, 디바이스 아이디, 가장 최근 입력시간, 가장 최근 데시벨, 온도)
-    @GetMapping("/top")
-    public ResponseEntity<Object> find(){
-        return null;
+    @GetMapping("/recent")
+    public ResponseEntity<DeviceRecentBundleResDTO> findRecentNoises() {
+        return new ResponseEntity<>(noiseService.findRecentNoises(), HttpStatus.OK);
     }
 
     //tag 수정
