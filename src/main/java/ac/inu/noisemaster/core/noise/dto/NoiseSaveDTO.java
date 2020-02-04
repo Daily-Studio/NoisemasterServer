@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NoiseSaveDTO {
-    private String decibel;
+    private Double decibel;
     private String device;
     private String temperature;
     private String tag;
@@ -19,7 +19,7 @@ public class NoiseSaveDTO {
     private String gridY;
 
     @Builder(builderMethodName = "testBuilder")
-    public NoiseSaveDTO(String decibel, String device, String temperature, String tag, String gridX, String gridY) {
+    public NoiseSaveDTO(Double decibel, String device, String temperature, String tag, String gridX, String gridY) {
         this.decibel = decibel;
         this.device = device;
         this.temperature = temperature;

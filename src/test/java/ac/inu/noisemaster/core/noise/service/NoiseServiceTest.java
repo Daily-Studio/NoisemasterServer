@@ -39,7 +39,7 @@ class NoiseServiceTest {
     @Test
     void save1() {
         NoiseSaveDTO noiseSaveDTO = NoiseSaveDTO.testBuilder()
-                .decibel("10db")
+                .decibel(10D)
                 .device("raspberry1")
                 .temperature("36.5")
                 .gridX("123.123")
@@ -57,7 +57,7 @@ class NoiseServiceTest {
     @Test
     void save2() {
         NoiseSaveDTO noiseSaveDTO = NoiseSaveDTO.testBuilder()
-                .decibel("10db")
+                .decibel(10D)
                 .device("raspberry1")
                 .temperature("36.5")
                 .tag("태그1")

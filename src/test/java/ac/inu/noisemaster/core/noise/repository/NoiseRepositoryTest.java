@@ -59,8 +59,10 @@ class NoiseRepositoryTest {
         place = placeRepository.saveAndFlush(place);
 
         for (int i = 0; i < count; i++) {
-            Noise noise = new Noise(i + " db", "d1", "36.0", null, place);
+            Noise noise = new Noise((double) i, "d1", "36.0", null, place);
             noiseRepository.save(noise);
         }
     }
+
+
 }

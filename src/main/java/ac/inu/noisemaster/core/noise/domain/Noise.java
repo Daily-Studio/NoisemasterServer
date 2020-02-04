@@ -18,14 +18,14 @@ public class Noise extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String decibel;
+    private Double decibel;
     private String device;
     private String temperature;
     @ManyToOne
     private Place place;
 
     @Builder
-    public Noise(String decibel, String device, String temperature, String tag, Place place) {
+    public Noise(Double decibel, String device, String temperature, String tag, Place place) {
         this.decibel = decibel;
         this.device = device;
         this.temperature = temperature;

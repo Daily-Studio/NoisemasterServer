@@ -22,11 +22,10 @@ public class NoiseController {
 
     private final NoiseService noiseService;
 
-    //날짜 검색조건 추가
     //데시벨은 입력한 데시벨의 10단위로 10~19 까지 나오게
     @GetMapping
     public ResponseEntity<NoisePagingResDTO> findNoiseAdvance(@RequestParam(required = false) String device,
-                                                              @RequestParam(required = false) String decibel,
+                                                              @RequestParam(required = false) Double decibel,
                                                               @RequestParam(required = false) String temperature,
                                                               @RequestParam(required = false) String tag,
                                                               @RequestParam(required = false) String date,

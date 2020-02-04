@@ -1,6 +1,6 @@
-package ac.inu.noisemaster.core.noise;
+package ac.inu.noisemaster.core.noise.util;
 
-import ac.inu.noisemaster.core.noise.util.LocalDateTimeUtils;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LocalDateTimeUtilsTest {
 
+    @DisplayName("날짜는 그대로 시간은 절삭 후 0으로 만들기")
     @Test
     void convertZeroTime() {
         //given

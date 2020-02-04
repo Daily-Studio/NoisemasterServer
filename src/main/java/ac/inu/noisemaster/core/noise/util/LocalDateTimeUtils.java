@@ -11,10 +11,10 @@ public final class LocalDateTimeUtils {
     private static final String ZERO_TIME = " 00:00:00";
 
     public static LocalDateTime convertZeroTime(String date) {
-        return LocalDateTime.parse(parseDate(date), YYYY_MM_DD);
+        return LocalDateTime.parse(changeTimeToZero(date), YYYY_MM_DD);
     }
 
-    private static String parseDate(String date) {
+    private static String changeTimeToZero(String date) {
         String[] dates = date.split(SPACE);
         return dates[DATE] + ZERO_TIME;
     }

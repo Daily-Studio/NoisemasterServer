@@ -12,14 +12,14 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NoiseResDTO {
-    private String decibel;
+    private Double decibel;
     private String device;
     private String temperature;
     private PlaceDTO placeDTO;
     private String createdTime;
 
     @Builder
-    public NoiseResDTO(String decibel, String device, String temperature, PlaceDTO placeDTO, LocalDateTime createdTime) {
+    public NoiseResDTO(Double decibel, String device, String temperature, PlaceDTO placeDTO, LocalDateTime createdTime) {
         this.decibel = decibel;
         this.device = device;
         this.temperature = temperature;

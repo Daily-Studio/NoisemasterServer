@@ -1,6 +1,7 @@
 package ac.inu.noisemaster.core.noise.repository;
 
 import ac.inu.noisemaster.core.noise.domain.Noise;
+import ac.inu.noisemaster.core.noise.util.DecibelUtils;
 import ac.inu.noisemaster.core.noise.util.LocalDateTimeUtils;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQuery;
@@ -25,11 +26,11 @@ public class NoiseRepositoryImpl extends QuerydslRepositorySupport implements No
     }
 
     @Override
-    public Page<Noise> findDynamicPagingQueryAdvance(String device, String decibel, String temperature, String tag, String date, Pageable pageable) {
+    public Page<Noise> findDynamicPagingQueryAdvance(String device, Double decibel, String temperature, String tag, String date, Pageable pageable) {
         JPQLQuery<Noise> query = super.from(noise)
                 .where(eqDevice(device),
                         eqTemperature(temperature),
-                        eqDecibel(decibel),
+                        betweenDecibel(decibel),
                         betweenDate(date));
 
         List<Noise> result = Objects.requireNonNull(getQuerydsl())
@@ -46,11 +47,13 @@ public class NoiseRepositoryImpl extends QuerydslRepositorySupport implements No
         return noise.device.eq(device);
     }
 
-    private BooleanExpression eqDecibel(String decibel) {
-        if (StringUtils.isEmpty(decibel)) {
+    private BooleanExpression betweenDecibel(Double decibel) {
+        if (decibel == null) {
             return null;
         }
-        return noise.decibel.eq(decibel);
+        double from = DecibelUtils.down(decibel);
+        double to = DecibelUtils.upperMinusOne(decibel);
+        return noise.decibel.between(from, to);
     }
 
     private BooleanExpression eqTemperature(String temperature) {
