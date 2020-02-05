@@ -79,7 +79,4 @@ class NoiseServiceTest {
         assertThat(all).hasSize(1);
     }
 
-    @Test
-    void findNoiseAdvance() {
-    }
 }

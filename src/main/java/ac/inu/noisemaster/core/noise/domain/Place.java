@@ -1,11 +1,11 @@
 package ac.inu.noisemaster.core.noise.domain;
 
+import ac.inu.noisemaster.core.noise.dto.place.PlaceTagUpdateReqDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,5 +31,9 @@ public class Place {
 
     public boolean isSameGrid(Place place) {
         return this.tag.equals(place.tag);
+    }
+
+    public void updateTag(PlaceTagUpdateReqDTO placeTagUpdateReqDTO) {
+        this.tag = placeTagUpdateReqDTO.getTag();
     }
 }

@@ -27,7 +27,7 @@ public class Noise extends BaseTimeEntity {
     private Place place;
 
     @Builder
-    public Noise(Double decibel, Device device, String temperature, String tag, Place place) {
+    public Noise(Double decibel, Device device, String temperature, Place place) {
         this.decibel = decibel;
         this.device = device;
         this.temperature = temperature;

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class NoisemasterApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NoisemasterApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(NoisemasterApplication.class, args);
+    }
 
 }

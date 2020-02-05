@@ -3,9 +3,11 @@ package ac.inu.noisemaster.web;
 import ac.inu.noisemaster.core.noise.domain.Device;
 import ac.inu.noisemaster.core.noise.domain.Noise;
 import ac.inu.noisemaster.core.noise.domain.Place;
+import ac.inu.noisemaster.core.noise.dto.place.PlaceTagUpdateReqDTO;
 import ac.inu.noisemaster.core.noise.repository.PlaceRepository;
 import ac.inu.noisemaster.core.noise.repository.device.DeviceRepository;
 import ac.inu.noisemaster.core.noise.repository.noise.NoiseRepository;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +24,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class NoiseControllerTest {
 
     private static final String NOISE_URL = "/api/v1/noise";
+    private static final Gson gson = new Gson();
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -160,6 +166,18 @@ class NoiseControllerTest {
                 .andExpect(jsonPath("$.data.noises", hasSize(2)));
     }
 
+    private static Place aPlace(String tag) {
+        return Place.builder()
+                .tag(tag)
+                .gridX("123")
+                .gridY("321")
+                .build();
+    }
+
+    private static Place aPlace() {
+        return aPlace("태그");
+    }
+
     @DisplayName("디바이스별 가장 최근 소음정보들 하나씩 노출")
     @Test
     void test3() throws Exception {
@@ -177,6 +195,7 @@ class NoiseControllerTest {
         Noise noiseB3 = Noise.builder().device(device2).place(place).decibel(3D).build();
 
         noiseRepository.saveAll(Arrays.asList(noiseA1, noiseA2, noiseA3, noiseB1, noiseB2, noiseB3));
+        noiseRepository.flush();
 
         //when
         mockMvc.perform(get(NOISE_URL + "/recent")
@@ -188,11 +207,29 @@ class NoiseControllerTest {
                 .andExpect(jsonPath("$.devices", hasSize(2)));
     }
 
-    private Place aPlace() {
-        return Place.builder()
-                .tag("태그")
-                .gridX("123")
-                .gridY("321")
-                .build();
+    @DisplayName("tag 수정하기")
+    @Test
+    void test4() throws Exception {
+        //given
+        Place place = placeRepository.saveAndFlush(aPlace(null));
+        Device device = deviceRepository.saveAndFlush(aDevice("디바이스 1"));
+        Noise noise = Noise.builder().device(device).place(place).build();
+        noiseRepository.saveAndFlush(noise);
+
+        //when
+        String changeTag = "태그";
+        PlaceTagUpdateReqDTO placeTagUpdateReqDTO = new PlaceTagUpdateReqDTO(place.getId(), changeTag);
+
+        //then
+        assertThat(place.getTag()).isBlank();
+
+        mockMvc.perform(put(NOISE_URL + "/place/tag")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(gson.toJson(placeTagUpdateReqDTO)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.tag", is(changeTag)));
     }
+
 }
