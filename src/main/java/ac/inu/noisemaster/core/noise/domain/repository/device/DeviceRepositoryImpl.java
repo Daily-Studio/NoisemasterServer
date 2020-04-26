@@ -24,6 +24,7 @@ public class DeviceRepositoryImpl extends QuerydslRepositorySupport implements D
                 .distinct()
                 .innerJoin(device.noises, noise).fetchJoin()
                 .innerJoin(noise.place, place).fetchJoin()
+                .orderBy(noise.createdTime.desc())
                 .fetch();
     }
 }

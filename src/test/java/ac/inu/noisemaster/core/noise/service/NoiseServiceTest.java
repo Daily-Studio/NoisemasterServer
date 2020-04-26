@@ -6,6 +6,7 @@ import ac.inu.noisemaster.core.noise.domain.model.Place;
 import ac.inu.noisemaster.core.noise.domain.repository.PlaceRepository;
 import ac.inu.noisemaster.core.noise.domain.repository.device.DeviceRepository;
 import ac.inu.noisemaster.core.noise.domain.repository.noise.NoiseRepository;
+import ac.inu.noisemaster.core.noise.dto.device.DeviceRecentBundleResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoisePagingResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoiseSaveDTO;
 import com.google.gson.Gson;
@@ -131,6 +132,33 @@ class NoiseServiceTest {
 
         //then
         assertThat(noiseAdvance.getData().getNoises().get(0).getDecibel()).isEqualTo(3D);
+    }
+
+    @DisplayName("최근 저장된 디바이스가 가장 위로 올라오도록")
+    @Test
+    void name2() throws InterruptedException {
+        //given
+        Place place = placeRepository.saveAndFlush(aPlace());
+        Device device1 = deviceRepository.saveAndFlush(aDevice("device 1"));
+        Device device2 = deviceRepository.saveAndFlush(aDevice("device 2"));
+        Device device3 = deviceRepository.saveAndFlush(aDevice("device 3"));
+
+        Noise noiseA1 = Noise.builder().device(device1).place(place).decibel(1D).build();
+        Thread.sleep(10);
+        Noise noiseB1 = Noise.builder().device(device2).place(place).decibel(1D).build();
+        Thread.sleep(10);
+        Noise noiseC1 = Noise.builder().device(device3).place(place).decibel(1D).build();
+
+        noiseRepository.save(noiseA1);
+        noiseRepository.save(noiseB1);
+        noiseRepository.save(noiseC1);
+        noiseRepository.flush();
+
+        //when
+        DeviceRecentBundleResDTO recentNoises = noiseService.findRecentNoises();
+
+        //then
+        assertThat(recentNoises.getDevices().get(0).getDevice()).isEqualTo("device 3");
     }
 
     private Device aDevice(String name) {
