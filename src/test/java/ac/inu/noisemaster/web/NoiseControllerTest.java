@@ -126,12 +126,6 @@ class NoiseControllerTest {
         return new Device(name);
     }
 
-    @Test
-    void saveNoise() {
-        //given
-        //when
-        //then
-    }
 
     @DisplayName("decibel 10단위 검색")
     @Test
@@ -234,4 +228,36 @@ class NoiseControllerTest {
                 .andExpect(jsonPath("$.tag", is(changeTag)));
     }
 
+    @DisplayName("페이징 결과")
+    @Test
+    void name1() throws Exception {
+        //given
+        Place place = placeRepository.saveAndFlush(aPlace());
+        Device device1 = deviceRepository.saveAndFlush(aDevice("device 1"));
+
+        Noise noiseA1 = Noise.builder().device(device1).place(place).decibel(1D).build();
+        Noise noiseA2 = Noise.builder().device(device1).place(place).decibel(2D).build();
+        Noise noiseA3 = Noise.builder().device(device1).place(place).decibel(3D).build();
+        Thread.sleep(10);
+        Noise noiseB1 = Noise.builder().device(device1).place(place).decibel(4D).build();
+        Noise noiseB2 = Noise.builder().device(device1).place(place).decibel(5D).build();
+        Noise noiseB3 = Noise.builder().device(device1).place(place).decibel(6D).build();
+
+        noiseRepository.save(noiseA1);
+        noiseRepository.save(noiseA2);
+        noiseRepository.save(noiseA3);
+        noiseRepository.save(noiseB1);
+        noiseRepository.save(noiseB2);
+        noiseRepository.save(noiseB3);
+        noiseRepository.flush();
+
+        //when
+        mockMvc.perform(get(NOISE_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .param("size", "50")
+        ).andDo(print())
+                //then
+                .andExpect(status().isOk());
+    }
 }

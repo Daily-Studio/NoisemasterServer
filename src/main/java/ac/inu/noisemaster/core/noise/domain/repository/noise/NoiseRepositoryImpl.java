@@ -35,7 +35,8 @@ public class NoiseRepositoryImpl extends QuerydslRepositorySupport implements No
                 .where(eqDevice(device),
                         eqTemperature(temperature),
                         betweenDecibel(decibel),
-                        betweenDate(date));
+                        betweenDate(date))
+                .orderBy(noise.createdTime.desc());
 
         List<Noise> result = Objects.requireNonNull(getQuerydsl())
                 .applyPagination(pageable, query)
