@@ -1,6 +1,6 @@
 package ac.inu.noisemaster.core.noise.dto.device;
 
-import ac.inu.noisemaster.core.noise.domain.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Device;
 import lombok.Getter;
 
 import java.util.List;

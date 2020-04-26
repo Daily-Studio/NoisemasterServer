@@ -1,4 +1,4 @@
-package ac.inu.noisemaster.core.noise.domain;
+package ac.inu.noisemaster.core.noise.domain.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;

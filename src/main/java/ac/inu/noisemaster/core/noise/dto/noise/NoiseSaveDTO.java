@@ -1,8 +1,8 @@
 package ac.inu.noisemaster.core.noise.dto.noise;
 
-import ac.inu.noisemaster.core.noise.domain.Device;
-import ac.inu.noisemaster.core.noise.domain.Noise;
-import ac.inu.noisemaster.core.noise.domain.Place;
+import ac.inu.noisemaster.core.noise.domain.model.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
+import ac.inu.noisemaster.core.noise.domain.model.Place;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

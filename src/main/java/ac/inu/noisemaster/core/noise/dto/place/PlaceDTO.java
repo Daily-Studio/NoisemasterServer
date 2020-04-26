@@ -1,6 +1,6 @@
 package ac.inu.noisemaster.core.noise.dto.place;
 
-import ac.inu.noisemaster.core.noise.domain.Place;
+import ac.inu.noisemaster.core.noise.domain.model.Place;
 import lombok.Builder;
 import lombok.Getter;
 

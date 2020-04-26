@@ -1,7 +1,7 @@
-package ac.inu.noisemaster.core.noise.repository.noise;
+package ac.inu.noisemaster.core.noise.domain.repository.noise;
 
-import ac.inu.noisemaster.core.noise.domain.Noise;
-import ac.inu.noisemaster.core.noise.domain.QDevice;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
+import ac.inu.noisemaster.core.noise.domain.model.QDevice;
 import ac.inu.noisemaster.core.noise.util.DecibelUtils;
 import ac.inu.noisemaster.core.noise.util.LocalDateTimeUtils;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static ac.inu.noisemaster.core.noise.domain.QNoise.noise;
-import static ac.inu.noisemaster.core.noise.domain.QPlace.place;
+import static ac.inu.noisemaster.core.noise.domain.model.QNoise.noise;
+import static ac.inu.noisemaster.core.noise.domain.model.QPlace.place;
 
 
 @Repository

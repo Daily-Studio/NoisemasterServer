@@ -1,6 +1,6 @@
 package ac.inu.noisemaster.core.noise.dto.noise;
 
-import ac.inu.noisemaster.core.noise.domain.Noise;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
 import ac.inu.noisemaster.core.noise.dto.place.PlaceDTO;
 import lombok.AccessLevel;
 import lombok.Builder;

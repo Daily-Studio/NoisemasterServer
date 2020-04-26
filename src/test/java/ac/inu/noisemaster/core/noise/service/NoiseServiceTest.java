@@ -1,11 +1,11 @@
 package ac.inu.noisemaster.core.noise.service;
 
-import ac.inu.noisemaster.core.noise.domain.Noise;
-import ac.inu.noisemaster.core.noise.domain.Place;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
+import ac.inu.noisemaster.core.noise.domain.model.Place;
+import ac.inu.noisemaster.core.noise.domain.repository.PlaceRepository;
+import ac.inu.noisemaster.core.noise.domain.repository.device.DeviceRepository;
+import ac.inu.noisemaster.core.noise.domain.repository.noise.NoiseRepository;
 import ac.inu.noisemaster.core.noise.dto.noise.NoiseSaveDTO;
-import ac.inu.noisemaster.core.noise.repository.PlaceRepository;
-import ac.inu.noisemaster.core.noise.repository.device.DeviceRepository;
-import ac.inu.noisemaster.core.noise.repository.noise.NoiseRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

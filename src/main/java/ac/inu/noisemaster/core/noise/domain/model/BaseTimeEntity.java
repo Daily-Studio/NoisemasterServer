@@ -1,4 +1,4 @@
-package ac.inu.noisemaster.core.noise.domain;
+package ac.inu.noisemaster.core.noise.domain.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

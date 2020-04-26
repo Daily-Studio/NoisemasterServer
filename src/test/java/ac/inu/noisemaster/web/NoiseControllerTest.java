@@ -1,12 +1,12 @@
 package ac.inu.noisemaster.web;
 
-import ac.inu.noisemaster.core.noise.domain.Device;
-import ac.inu.noisemaster.core.noise.domain.Noise;
-import ac.inu.noisemaster.core.noise.domain.Place;
+import ac.inu.noisemaster.core.noise.domain.model.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
+import ac.inu.noisemaster.core.noise.domain.model.Place;
+import ac.inu.noisemaster.core.noise.domain.repository.PlaceRepository;
+import ac.inu.noisemaster.core.noise.domain.repository.device.DeviceRepository;
+import ac.inu.noisemaster.core.noise.domain.repository.noise.NoiseRepository;
 import ac.inu.noisemaster.core.noise.dto.place.PlaceTagUpdateReqDTO;
-import ac.inu.noisemaster.core.noise.repository.PlaceRepository;
-import ac.inu.noisemaster.core.noise.repository.device.DeviceRepository;
-import ac.inu.noisemaster.core.noise.repository.noise.NoiseRepository;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,17 +1,17 @@
 package ac.inu.noisemaster.core.noise.service;
 
-import ac.inu.noisemaster.core.noise.domain.Device;
-import ac.inu.noisemaster.core.noise.domain.Noise;
-import ac.inu.noisemaster.core.noise.domain.Place;
+import ac.inu.noisemaster.core.noise.domain.model.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
+import ac.inu.noisemaster.core.noise.domain.model.Place;
+import ac.inu.noisemaster.core.noise.domain.repository.PlaceRepository;
+import ac.inu.noisemaster.core.noise.domain.repository.device.DeviceRepository;
+import ac.inu.noisemaster.core.noise.domain.repository.noise.NoiseRepository;
 import ac.inu.noisemaster.core.noise.dto.device.DeviceRecentBundleResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoisePagingResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoiseResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoiseSaveDTO;
 import ac.inu.noisemaster.core.noise.dto.place.PlaceDTO;
 import ac.inu.noisemaster.core.noise.dto.place.PlaceTagUpdateReqDTO;
-import ac.inu.noisemaster.core.noise.repository.PlaceRepository;
-import ac.inu.noisemaster.core.noise.repository.device.DeviceRepository;
-import ac.inu.noisemaster.core.noise.repository.noise.NoiseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

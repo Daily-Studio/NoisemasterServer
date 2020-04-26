@@ -1,4 +1,4 @@
-package ac.inu.noisemaster.core.noise.domain;
+package ac.inu.noisemaster.core.noise.domain.model;
 
 import ac.inu.noisemaster.core.noise.dto.place.PlaceTagUpdateReqDTO;
 import lombok.AccessLevel;

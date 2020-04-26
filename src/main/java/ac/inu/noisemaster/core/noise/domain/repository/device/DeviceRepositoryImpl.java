@@ -1,14 +1,15 @@
-package ac.inu.noisemaster.core.noise.repository.device;
+package ac.inu.noisemaster.core.noise.domain.repository.device;
 
-import ac.inu.noisemaster.core.noise.domain.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Device;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static ac.inu.noisemaster.core.noise.domain.QDevice.device;
-import static ac.inu.noisemaster.core.noise.domain.QNoise.noise;
-import static ac.inu.noisemaster.core.noise.domain.QPlace.place;
+import static ac.inu.noisemaster.core.noise.domain.model.QDevice.device;
+import static ac.inu.noisemaster.core.noise.domain.model.QNoise.noise;
+import static ac.inu.noisemaster.core.noise.domain.model.QPlace.place;
+
 
 @Repository
 public class DeviceRepositoryImpl extends QuerydslRepositorySupport implements DeviceRepositoryCustom {
@@ -23,7 +24,7 @@ public class DeviceRepositoryImpl extends QuerydslRepositorySupport implements D
                 .distinct()
                 .innerJoin(device.noises, noise).fetchJoin()
                 .innerJoin(noise.place, place).fetchJoin()
-                .orderBy(noise.createdTime.desc())
+                .orderBy(noise.createdTime.asc())
                 .fetch();
     }
 }
