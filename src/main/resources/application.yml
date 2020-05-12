@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: major
+    active: dump
 
 ---
 spring.profiles: local
@@ -16,6 +16,7 @@ spring:
         format_sql: false
         hbm2ddl:
           auto: update
+
 ---
 spring:
   profiles: major
@@ -36,3 +37,25 @@ spring:
     properties:
       hibernate:
         format_sql: false
+
+---
+spring:
+  profiles: dump
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driverClassName: org.h2.Driver
+    hikari:
+      jdbc-url: jdbc:h2:file:./noise-master-dump;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: true

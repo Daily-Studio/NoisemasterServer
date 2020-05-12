@@ -2,13 +2,16 @@ package ac.inu.noisemaster.core.noise.dto.device;
 
 import ac.inu.noisemaster.core.noise.domain.model.Device;
 import ac.inu.noisemaster.core.noise.dto.place.PlaceDTO;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DeviceRecentResDTO {
     private String device;
     private Double decibel;

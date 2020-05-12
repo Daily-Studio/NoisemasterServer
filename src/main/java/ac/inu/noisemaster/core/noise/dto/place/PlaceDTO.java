@@ -1,10 +1,13 @@
 package ac.inu.noisemaster.core.noise.dto.place;
 
 import ac.inu.noisemaster.core.noise.domain.model.Place;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PlaceDTO {
     private Long placeId;
     private String tag;

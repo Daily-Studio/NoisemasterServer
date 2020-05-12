@@ -1,0 +1,30 @@
+2020-03-09 19:27:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE DEVICE (ID BIGINT NOT NULL AUTO_INCREMENT, NAME VARCHAR(255), PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table device (id bigint not null auto_increment, name varchar(255), primary key (id)) engine=MyISAM [42001-200]
+2020-03-09 19:27:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE NOISE (ID BIGINT NOT NULL AUTO_INCREMENT, CREATED_TIME DATETIME, DECIBEL DOUBLE PRECISION, TEMPERATURE VARCHAR(255), DEVICE_ID BIGINT, PLACE_ID BIGINT, PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table noise (id bigint not null auto_increment, created_time datetime, decibel double precision, temperature varchar(255), device_id bigint, place_id bigint, primary key (id)) engine=MyISAM [42001-200]
+2020-03-09 19:27:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE PLACE (ID BIGINT NOT NULL AUTO_INCREMENT, GRIDX VARCHAR(255), GRIDY VARCHAR(255), TAG VARCHAR(255), PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table place (id bigint not null auto_increment, gridx varchar(255), gridy varchar(255), tag varchar(255), primary key (id)) engine=MyISAM [42001-200]
+2020-03-09 19:27:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "NOISE" not found; SQL statement:
+alter table noise add constraint FKeaxlm2s5b5b0ii26cot712g2r foreign key (device_id) references device (id) [42102-200]
+2020-03-09 19:27:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "NOISE" not found; SQL statement:
+alter table noise add constraint FKjqdgetrxvwisu96eyxw850m6g foreign key (place_id) references place (id) [42102-200]
+2020-03-09 19:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE DEVICE (ID BIGINT NOT NULL AUTO_INCREMENT, NAME VARCHAR(255), PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table device (id bigint not null auto_increment, name varchar(255), primary key (id)) engine=MyISAM [42001-200]
+2020-03-09 19:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE NOISE (ID BIGINT NOT NULL AUTO_INCREMENT, CREATED_TIME DATETIME, DECIBEL DOUBLE PRECISION, TEMPERATURE VARCHAR(255), DEVICE_ID BIGINT, PLACE_ID BIGINT, PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table noise (id bigint not null auto_increment, created_time datetime, decibel double precision, temperature varchar(255), device_id bigint, place_id bigint, primary key (id)) engine=MyISAM [42001-200]
+2020-03-09 19:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE PLACE (ID BIGINT NOT NULL AUTO_INCREMENT, GRIDX VARCHAR(255), GRIDY VARCHAR(255), TAG VARCHAR(255), PRIMARY KEY (ID)) ENGINE=[*]MYISAM"; expected "identifier"; SQL statement:
+create table place (id bigint not null auto_increment, gridx varchar(255), gridy varchar(255), tag varchar(255), primary key (id)) engine=MyISAM [42001-200]
+2020-03-09 19:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "NOISE" not found; SQL statement:
+alter table noise add constraint FKeaxlm2s5b5b0ii26cot712g2r foreign key (device_id) references device (id) [42102-200]
+2020-03-09 19:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "NOISE" not found; SQL statement:
+alter table noise add constraint FKjqdgetrxvwisu96eyxw850m6g foreign key (place_id) references place (id) [42102-200]

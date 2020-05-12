@@ -35,4 +35,5 @@ public class Device {
     public Noise getNoiseOne() {
         return noises.get(0);
     }
+
 }

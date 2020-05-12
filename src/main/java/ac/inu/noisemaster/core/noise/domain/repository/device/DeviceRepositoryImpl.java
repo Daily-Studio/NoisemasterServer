@@ -27,4 +27,5 @@ public class DeviceRepositoryImpl extends QuerydslRepositorySupport implements D
                 .orderBy(noise.createdTime.desc())
                 .fetch();
     }
+
 }
