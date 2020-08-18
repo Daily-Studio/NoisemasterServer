@@ -3,8 +3,10 @@ package ac.inu.noisemaster.core.noise.dto.noise;
 import ac.inu.noisemaster.core.noise.domain.model.Noise;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.domain.Page;
 
+@ToString
 @Getter
 public class NoisePagingResDTO {
     private NoiseBundleResDTO data;

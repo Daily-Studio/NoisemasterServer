@@ -1,6 +1,6 @@
 package ac.inu.noisemaster.core.noise.dto.device;
 
-import ac.inu.noisemaster.core.noise.domain.model.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ public class DeviceRecentBundleResDTO {
         this.devices = devices;
     }
 
-    public static DeviceRecentBundleResDTO of(List<Device> devices) {
-        List<DeviceRecentResDTO> bundle = devices.stream()
+    public static DeviceRecentBundleResDTO of(List<Noise> noises) {
+        return noises.stream()
                 .map(DeviceRecentResDTO::from)
-                .collect(Collectors.toList());
-        return new DeviceRecentBundleResDTO(bundle);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), DeviceRecentBundleResDTO::new));
     }
+
 }

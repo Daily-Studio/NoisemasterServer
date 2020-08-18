@@ -1,6 +1,6 @@
 package ac.inu.noisemaster.core.noise.dto.device;
 
-import ac.inu.noisemaster.core.noise.domain.model.Device;
+import ac.inu.noisemaster.core.noise.domain.model.Noise;
 import ac.inu.noisemaster.core.noise.dto.place.PlaceDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -28,13 +28,14 @@ public class DeviceRecentResDTO {
         this.createdTime = createdTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
-    public static DeviceRecentResDTO from(Device device) {
+    public static DeviceRecentResDTO from(Noise noise) {
         return DeviceRecentResDTO.builder()
-                .device(device.getName())
-                .decibel(device.getNoiseOne().getDecibel())
-                .temperature(device.getNoiseOne().getTemperature())
-                .placeDTO(PlaceDTO.from(device.getNoiseOne().getPlace()))
-                .createdTime(device.getNoiseOne().getCreatedTime())
+                .device(noise.getDeviceName())
+                .decibel(noise.getDecibel())
+                .temperature(noise.getTemperature())
+                .placeDTO(PlaceDTO.from(noise.getPlace()))
+                .createdTime(noise.getCreatedTime())
                 .build();
     }
+
 }

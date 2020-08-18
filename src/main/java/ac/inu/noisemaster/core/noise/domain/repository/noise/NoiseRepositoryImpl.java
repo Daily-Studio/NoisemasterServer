@@ -16,7 +16,9 @@ import org.springframework.util.StringUtils;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
+import static ac.inu.noisemaster.core.noise.domain.model.QDevice.device;
 import static ac.inu.noisemaster.core.noise.domain.model.QNoise.noise;
 import static ac.inu.noisemaster.core.noise.domain.model.QPlace.place;
 
@@ -43,6 +45,15 @@ public class NoiseRepositoryImpl extends QuerydslRepositorySupport implements No
                 .fetch();
 
         return new PageImpl<>(result, pageable, query.fetchCount());
+    }
+
+    @Override
+    public Optional<Noise> findRecentNoiseByDeviceName(String deviceName) {
+        return Optional.of(super.from(noise)
+                .innerJoin(noise.device, device)
+                .where(noise.device.name.eq(deviceName))
+                .orderBy(noise.createdTime.desc())
+                .fetchFirst());
     }
 
     private BooleanExpression eqDevice(String device) {

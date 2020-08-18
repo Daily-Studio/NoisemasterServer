@@ -18,7 +18,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +60,13 @@ public class NoiseService {
 
     @Transactional(readOnly = true)
     public DeviceRecentBundleResDTO findRecentNoises() {
-        return DeviceRecentBundleResDTO.of(deviceRepository.findRecentDevice());
+        List<Device> devices = deviceRepository.findAll();
+        List<Noise> recentNoises = new ArrayList<>();
+        for (Device device : devices) {
+            Optional<Noise> recentNoise = noiseRepository.findRecentNoiseByDeviceName(device.getName());
+            recentNoise.ifPresent(recentNoises::add);
+        }
+        return DeviceRecentBundleResDTO.of(recentNoises);
     }
 
     @Transactional

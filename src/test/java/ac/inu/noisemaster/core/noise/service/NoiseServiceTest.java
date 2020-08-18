@@ -7,6 +7,7 @@ import ac.inu.noisemaster.core.noise.domain.repository.PlaceRepository;
 import ac.inu.noisemaster.core.noise.domain.repository.device.DeviceRepository;
 import ac.inu.noisemaster.core.noise.domain.repository.noise.NoiseRepository;
 import ac.inu.noisemaster.core.noise.dto.device.DeviceRecentBundleResDTO;
+import ac.inu.noisemaster.core.noise.dto.device.DeviceRecentResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoisePagingResDTO;
 import ac.inu.noisemaster.core.noise.dto.noise.NoiseSaveDTO;
 import com.google.gson.Gson;
@@ -21,6 +22,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -107,17 +111,28 @@ class NoiseServiceTest {
         Place place = placeRepository.saveAndFlush(aPlace());
         Device device1 = deviceRepository.saveAndFlush(aDevice("device 1"));
 
-        Noise noiseA1 = Noise.builder().device(device1).place(place).decibel(1D).build();
-        Thread.sleep(10);
-        Noise noiseA2 = Noise.builder().device(device1).place(place).decibel(2D).build();
-        Thread.sleep(10);
-        Noise noiseA3 = Noise.builder().device(device1).place(place).decibel(3D).build();
-        Thread.sleep(10);
-        Noise noiseB1 = Noise.builder().device(device1).place(place).decibel(4D).build();
-        Thread.sleep(10);
-        Noise noiseB2 = Noise.builder().device(device1).place(place).decibel(5D).build();
-        Thread.sleep(10);
-        Noise noiseB3 = Noise.builder().device(device1).place(place).decibel(6D).build();
+        LocalDateTime time = LocalDateTime.now();
+        Noise noiseA1 = Noise.builder().device(device1).place(place).decibel(1D)
+                .createdTime(time).build();
+
+        time = time.plus(10, ChronoUnit.SECONDS);
+        Noise noiseA2 = Noise.builder().device(device1).place(place).decibel(2D)
+                .createdTime(time).build();
+        time = time.plus(10, ChronoUnit.SECONDS);
+        Noise noiseA3 = Noise.builder().device(device1).place(place).decibel(3D)
+                .createdTime(time).build();
+
+        time = time.plus(10, ChronoUnit.SECONDS);
+        Noise noiseB1 = Noise.builder().device(device1).place(place).decibel(4D)
+                .createdTime(time).build();
+
+        time = time.plus(10, ChronoUnit.SECONDS);
+        Noise noiseB2 = Noise.builder().device(device1).place(place).decibel(5D)
+                .createdTime(time).build();
+
+        time = time.plus(10, ChronoUnit.SECONDS);
+        Noise noiseB3 = Noise.builder().device(device1).place(place).decibel(6D)
+                .createdTime(time).build();
 
         noiseRepository.save(noiseA1);
         noiseRepository.save(noiseA2);
@@ -128,37 +143,42 @@ class NoiseServiceTest {
         noiseRepository.flush();
 
         //when
-        NoisePagingResDTO noiseAdvance = noiseService.findNoiseAdvance(null, null, null, null, null, PageRequest.of(1, 3));
+        NoisePagingResDTO noiseAdvance = noiseService.findNoiseAdvance(null, null, null, null, null, PageRequest.of(0, 6));
 
         //then
-        assertThat(noiseAdvance.getData().getNoises().get(0).getDecibel()).isEqualTo(3D);
+        assertThat(noiseAdvance.getData().getNoises().get(0).getDecibel()).isEqualTo(6);
     }
 
     @DisplayName("최근 저장된 디바이스가 가장 위로 올라오도록")
     @Test
-    void name2() throws InterruptedException {
+    void name2() {
         //given
         Place place = placeRepository.saveAndFlush(aPlace());
         Device device1 = deviceRepository.saveAndFlush(aDevice("device 1"));
         Device device2 = deviceRepository.saveAndFlush(aDevice("device 2"));
-        Device device3 = deviceRepository.saveAndFlush(aDevice("device 3"));
 
-        Noise noiseA1 = Noise.builder().device(device1).place(place).decibel(1D).build();
-        Thread.sleep(10);
-        Noise noiseB1 = Noise.builder().device(device2).place(place).decibel(1D).build();
-        Thread.sleep(10);
-        Noise noiseC1 = Noise.builder().device(device3).place(place).decibel(1D).build();
+        LocalDateTime time = LocalDateTime.now();
+        Noise noiseA1 = Noise.builder().device(device1).place(place).decibel(1D)
+                .createdTime(time).build();
 
-        noiseRepository.save(noiseA1);
-        noiseRepository.save(noiseB1);
-        noiseRepository.save(noiseC1);
-        noiseRepository.flush();
+        LocalDateTime secondTime = time.plus(100, ChronoUnit.SECONDS);
+        Noise noiseA2 = Noise.builder().device(device1).place(place).decibel(3D)
+                .createdTime(secondTime).build();
+
+        LocalDateTime thirdTime = secondTime.plus(100, ChronoUnit.SECONDS);
+        Noise noiseB1 = Noise.builder().device(device2).place(place).decibel(1D)
+                .createdTime(thirdTime).build();
+
+        noiseRepository.saveAll(Arrays.asList(noiseA1, noiseA2, noiseB1));
 
         //when
         DeviceRecentBundleResDTO recentNoises = noiseService.findRecentNoises();
 
         //then
-        assertThat(recentNoises.getDevices().get(0).getDevice()).isEqualTo("device 3");
+        DeviceRecentResDTO deviceDto = recentNoises.getDevices().stream()
+                .filter(deviceRecentResDTO -> deviceRecentResDTO.getDevice().equals("device 1"))
+                .findFirst().orElseThrow(RuntimeException::new);
+        assertThat(deviceDto.getDecibel()).isEqualTo(3D);
     }
 
     private Device aDevice(String name) {

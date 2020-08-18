@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dump
+    active: major
 
 ---
 spring.profiles: local

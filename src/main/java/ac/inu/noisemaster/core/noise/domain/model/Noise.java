@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,9 +28,10 @@ public class Noise extends BaseTimeEntity {
     private Place place;
 
     @Builder
-    public Noise(Double decibel, Device device, String temperature, Place place) {
-        this.decibel = decibel;
+    public Noise(final LocalDateTime createdTime, final Device device, final Double decibel, final String temperature, final Place place) {
+        super(createdTime);
         this.device = device;
+        this.decibel = decibel;
         this.temperature = temperature;
         this.place = place;
     }

@@ -14,4 +14,11 @@ import java.time.LocalDateTime;
 public abstract class BaseTimeEntity {
     @CreatedDate
     private LocalDateTime createdTime;
+
+    public BaseTimeEntity() {
+    }
+
+    public BaseTimeEntity(final LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
 }
