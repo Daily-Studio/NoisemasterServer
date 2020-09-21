@@ -181,6 +181,22 @@ class NoiseServiceTest {
         assertThat(deviceDto.getDecibel()).isEqualTo(3D);
     }
 
+    @DisplayName("저장 내역이 아예 없는 경우")
+    @Test
+    void name3() {
+        //given
+        Place place = placeRepository.saveAndFlush(aPlace());
+        Device device1 = deviceRepository.saveAndFlush(aDevice("device 1"));
+        Device device2 = deviceRepository.saveAndFlush(aDevice("device 2"));
+
+        //when
+        DeviceRecentBundleResDTO recentNoises = noiseService.findRecentNoises();
+
+        //then
+
+        assertThat(recentNoises.getDevices()).hasSize(0);
+    }
+
     private Device aDevice(String name) {
         return new Device(name);
     }

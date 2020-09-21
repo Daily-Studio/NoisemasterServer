@@ -49,7 +49,7 @@ public class NoiseRepositoryImpl extends QuerydslRepositorySupport implements No
 
     @Override
     public Optional<Noise> findRecentNoiseByDeviceName(String deviceName) {
-        return Optional.of(super.from(noise)
+        return Optional.ofNullable(super.from(noise)
                 .innerJoin(noise.device, device)
                 .where(noise.device.name.eq(deviceName))
                 .orderBy(noise.createdTime.desc())
